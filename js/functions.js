@@ -291,6 +291,7 @@ function update_programmes () {
     
       let programs_selected_array = read_filters()
       let no_programs_text = document.querySelector("p");
+
       array_each(programs_selected_array, create_programme)
       if (previous_programmes_doms.innerHTML === "") {
         no_programs_text.style.display = "block";
@@ -309,7 +310,18 @@ function update_programmes () {
 // Optional VG: Which parts of the function's code could be abstracted?
 //              Implement it
 function read_filters () {
+    /*
+  NO ARGUMENTS
+
+  SIDE-EFFECTS
+  This function creates an array "programmes" which includes all the programmes
+  (from the array PROGRAMMES) that includes what filters, city, level, subject, languages
+  that is selected, as well as any value taken from the search-field.
   
+  RETURN VALUE
+  Programmes
+  */
+    
   const city_selected_dom = document.querySelectorAll("#country_filter li.selected");
 
   const city_id_selected = [];
