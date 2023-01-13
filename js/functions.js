@@ -186,7 +186,9 @@ function create_levels_filter () {
   RETURN VALUE
   None.
   */
-    const filter_name = ["level", "subject", "language"];
+
+  // Fungerar ej - VARFÖR?????
+/*     const filter_name = ["level", "subject", "language"];
 
     function create_filters (filter) {
 
@@ -205,9 +207,7 @@ function create_levels_filter () {
     number = 2;
     array_each(LANGUAGES, create_filters);
 }
-
-
-/*   
+ */  
   function create_level (level) {
     const dom = create_filter_element({
       parent: document.querySelector("#level_filter > ul"),
@@ -242,7 +242,7 @@ function create_language_filter () {
   }
   array_each(LANGUAGES, create_element);
 }
- */
+
 
 // G / VG (see details in specification)
 // CODE according to specifications
