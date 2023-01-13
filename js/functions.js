@@ -165,7 +165,6 @@ function create_countries_cities_filters () {
     dom.dataset.id = city.id;
 
   }
-
   array_each(COUNTRIES, create_country);
 }
 
@@ -187,6 +186,32 @@ function create_levels_filter () {
   RETURN VALUE
   None.
   */
+  const filter_name = ["level", "subject", "language"];
+
+    function create_filters (filter) {
+
+      const dom = create_filter_element ({
+        parent: document.querySelector(`#${filter_name[number]}_filter > ul`),
+        class: "selected",
+        textContent: filter.name,
+      });
+      dom.dataset.id = filter.id;
+
+    }  
+    let number = 0;
+    array_each(LEVELS, create_filters);
+    number = 1;
+    array_each(SUBJECTS, create_filters);
+    number = 2;
+    array_each(LANGUAGES, create_filters);
+}
+
+
+
+
+
+
+/*   
   function create_level (level) {
     const dom = create_filter_element({
       parent: document.querySelector("#level_filter > ul"),
@@ -221,7 +246,7 @@ function create_language_filter () {
   }
   array_each(LANGUAGES, create_element);
 }
-
+ */
 
 // G / VG (see details in specification)
 // CODE according to specifications
