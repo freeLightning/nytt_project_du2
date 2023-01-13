@@ -216,7 +216,18 @@ function update_programmes () {
       NO RETURN VALUE
 
   */
-
+      let previous_programmes_doms = document.querySelector("#programmes > ul");
+      previous_programmes_doms.innerHTML = "";
+    
+      let programs_selected_array = read_filters()
+      let no_programs_text = document.querySelector("p");
+      array_each(programs_selected_array, create_programme)
+      if (previous_programmes_doms.innerHTML === "") {
+        no_programs_text.style.display = "block";
+      }
+      if (previous_programmes_doms.innerHTML !== "") {
+        no_programs_text.style.display = "none";
+      }
 }
 
 
