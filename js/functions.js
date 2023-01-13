@@ -194,8 +194,38 @@ function create_programme (programme) {
 
     NO RETURN VALUE
 
-  */  
-
+  */ 
+    let programe_dom = document.createElement("div");
+    let program_parent_dom = document.querySelector("#programmes > ul");
+    programe_dom.classList.add("programme");
+  
+    let programe_city_id = UNIVERSITIES[programme.universityID].cityID;
+    let programe_univeristy_name = UNIVERSITIES[programme.universityID].name;
+    let city_text = CITIES[programe_city_id].name
+  
+    let programe_country_id = CITIES[programe_city_id].countryID;
+    let programe_country_text = COUNTRIES[programe_country_id].name;
+  
+    let program_level_text = LEVELS[programme.levelID - 1].name;
+    let program_subject_text = SUBJECTS[programme.subjectID].name;
+    let program_language_text = LANGUAGES[programme.languageID].name;
+  
+    let procent = percenter(CITIES[programe_city_id].sun, 365);
+    let avarge_rate_text = 0;
+    function each_rate_function(each_rate) {
+      avarge_rate_text = avarge_rate_text + each_rate / programme.successRate.length;
+    }
+    array_each(programme.successRate, each_rate_function)
+    programe_dom.innerHTML =` 
+          <div>
+            <h1>${programme.name}</h1>
+            <p>${programe_univeristy_name}</p>
+            <p>${programe_country_text}, ${city_text}</p>
+            <p>${program_level_text}, ${program_subject_text}, ${program_language_text}</p>
+          </div>
+          <div class="bottom_programme">sun-index: ${CITIES[programe_city_id].sun}: ${procent}%</div>`
+      ;
+    program_parent_dom.appendChild(programe_dom);
 }
 
 
