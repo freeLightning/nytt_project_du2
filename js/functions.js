@@ -2,7 +2,6 @@
 // G
 // CODE According to specification
 function click_filter_element (event) {
-
   /*
     ARGUMENTS
       event: event-object created when user clicks on one of the filter elements.
@@ -13,19 +12,19 @@ function click_filter_element (event) {
       programmes must be updated.
 
       Attention VG
-        Careful with the propagation of the click-event
+      Careful with the propagation of the click-event
 
     NO RETURN VALUE
 
   */
-  
+  event.currentTarget.classList.toggle("selected");
+  update_programmes();
 }
 
 
 // G
 // CODE according to specification
 function create_filter_element (data) {
-
   /*
     ARGUMENTS
       data: object that contains the following keys:
@@ -45,7 +44,13 @@ function create_filter_element (data) {
     RETURN VALUE
       Returns a reference to the new dom-element
   */
-
+  let filter_elements = document.createElement("li");
+  filter_elements.classList.add(data.class);
+  filter_elements.textContent = data.textContent;
+  data.parent.appendChild(filter_elements);
+  filter_elements.addEventListener("click", click_filter_element);
+  
+  return filter_elements;
 }
 
 
@@ -96,7 +101,31 @@ function toggle_cities (event) {
 // ATTENTION: You need to write the specification of all three functions:
 //            create_countries_cities_filters, create_country and create_city
 function create_countries_cities_filters () {
+  /* 
+  ARGUMENTS
+    This function doesn't take any arguments.
+    SIDE-EFFECTS
+    Each element in the array COUNTRIES gets called as an argument in create_country.
+    RETURN VALUE
+    None. 
+    */
   function create_country (country) {
+    /* 
+    ARGUMENTS
+    This function takes an object from array COUNTRIES that contains the following keys:
+    id (number): the country id
+    name (string): the country name
+    imagesNormal (array of strings): country images    
+    
+    SIDE-EFFECTS
+    This function creates a new dom-element and gives it two classes, “country” and “filter_container”,
+    sets a new id “country_” and country.id.
+    Appends the new dom-element to "#country_filter > ul".
+    Sets the new dom-element through innerHTML a country name and a ul.
+    For each element in the array CITIES that are in the country gets called as an argument in create_city.
+    RETURN VALUE
+    None.
+    */
     const dom = document.createElement("div");
     dom.classList.add("country");
     dom.classList.add("filter_container");
@@ -116,6 +145,17 @@ function create_countries_cities_filters () {
     array_each(cities, create_city);
   }
   function create_city (city) {
+  /* 
+  ARGUMENTS
+  This function takes an object from the array cities as an argument: city
+  SIDE-EFFECTS
+  This function creates a new dom-element and gives it the parent "#country_${city.countryID} > ul"
+  Gives the new dom-element the class "selected"
+  Sets the text content of the new dom-element to city.name
+  Sets dataset.id to city.id
+  RETURN VALUE
+  None.
+  */
 
     const dom = create_filter_element({
       parent: document.querySelector(`#country_${city.countryID} > ul`),
