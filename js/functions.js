@@ -186,7 +186,7 @@ function create_levels_filter () {
   RETURN VALUE
   None.
   */
-  const filter_name = ["level", "subject", "language"];
+/*   const filter_name = ["level", "subject", "language"];
 
     function create_filters (filter) {
 
@@ -204,6 +204,27 @@ function create_levels_filter () {
     array_each(SUBJECTS, create_filters);
     number = 2;
     array_each(LANGUAGES, create_filters);
+}
+ */
+
+const arrayis = ["level", "subject", "language"];
+
+function create_what (what) {
+
+  const dom = create_filter_element ({
+    parent: document.querySelector(`#${arrayis[number]}_filter > ul`),
+    class: "selected",
+    textContent: what.name,
+  });
+  dom.dataset.id = what.id;
+
+}  
+let number = 0;
+array_each(LEVELS, create_what);
+number = 1;
+array_each(SUBJECTS, create_what);
+number = 2;
+array_each(LANGUAGES, create_what);
 }
 
 
